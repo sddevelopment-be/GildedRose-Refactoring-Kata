@@ -13,3 +13,4 @@
 - No way to add inventory after the Inn has been created
 - "No default item can have a quality of more than 50" 
     -> not ensured by the code. Test and fix if needed.
+- Write some wrapper around Item so that I can change the behaviour if needed or rename stuff withoput upsetting the Goblins
