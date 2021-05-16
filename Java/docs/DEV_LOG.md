@@ -4,6 +4,8 @@
  Convert tests to ensure the "requirements/desires" are met before we start making a mess of things.
     
 - [ ] Convert existing test suite into an automated one
+  - [x] item logic
+  - [ ] display logic
 - [ ] Add exploratory tests -> NULLPOINTER suspicions 
 
 ## Change the code

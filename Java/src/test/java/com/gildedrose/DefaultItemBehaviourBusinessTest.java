@@ -1,8 +1,13 @@
 package com.gildedrose;
 
-import org.assertj.core.api.Assertions;
+import static com.gildedrose.InnTestUtilities.createInnWithSingleItem;
+import static com.gildedrose.InnTestUtilities.timeAdvances;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Test;
 
+@DisplayNameGeneration(ReplaceUnderscoredCamelCasing.class)
 class DefaultItemBehaviourBusinessTest {
 
   public static final int DEFAULT_MAX_QUALITY = 50;
@@ -10,55 +15,64 @@ class DefaultItemBehaviourBusinessTest {
 
   @Test
   void givenADefaultMaxQualityItem_whenTimeAdvances_thenQualityDecreasesByDefaultDegradationAmount() {
-    GildedRose inn = InnTestUtilities.createInnWithSingleItem(
+    GildedRose inn = createInnWithSingleItem(
         new Item("+5 Dexterity Vest", 10, DEFAULT_MAX_QUALITY));
 
-    InnTestUtilities.timeAdvances(inn);
+    timeAdvances(inn);
 
-    Assertions.assertThat(inn.items[0])
+    assertThat(inn.items[0])
         .isNotNull()
         .extracting("quality")
         .isEqualTo(DEFAULT_MAX_QUALITY - DEFAULT_DEGRADATION_AMOUNT);
-
   }
 
   @Test
   void givenADefaultItem_whenTimeAdvances_theSellInDataDecreases() {
-    GildedRose inn = InnTestUtilities.createInnWithSingleItem(
+    GildedRose inn = createInnWithSingleItem(
         new Item("+5 Dexterity Vest", 10, DEFAULT_MAX_QUALITY));
 
-    InnTestUtilities.timeAdvances(inn);
+    timeAdvances(inn);
 
-    Assertions.assertThat(inn.items[0].sellIn).isEqualTo(9);
+    assertThat(inn.items[0].sellIn).isEqualTo(9);
   }
 
   @Test
   void givenADefaultItem_whenSellByDateIsExceeded_theQualityDegradationDoubles() {
-    GildedRose inn = InnTestUtilities.createInnWithSingleItem(
+    GildedRose inn = createInnWithSingleItem(
         new Item("+5 Dexterity Vest", 10, DEFAULT_MAX_QUALITY));
 
-    InnTestUtilities.timeAdvances(inn, 11);
+    timeAdvances(inn, 11);
 
-    Assertions.assertThat(inn.items[0].quality)
+    assertThat(inn.items[0].quality)
         .isEqualTo(DEFAULT_MAX_QUALITY - 12);
   }
 
   @Test
   void givenAnItem_whenSurpassingTheSellInDate_theQualityIsReducedToZero() {
-    GildedRose inn = InnTestUtilities.createInnWithSingleItem(new Item("Piece of wool", 2, 2));
+    GildedRose inn = createInnWithSingleItem(new Item("Piece of wool", 2, 2));
 
-    InnTestUtilities.timeAdvances(inn, 250);
+    timeAdvances(inn, 250);
 
-    Assertions.assertThat(inn.items[0].quality).isZero();
+    assertThat(inn.items[0].quality).isZero();
   }
 
   @Test
   void givenAnItem_whenDegradingTheItem_theQualityCanNeverBeNegative() {
-    GildedRose inn = InnTestUtilities.createInnWithSingleItem(new Item("Piece of wool", 2, 2));
+    GildedRose inn = createInnWithSingleItem(new Item("Piece of wool", 2, 2));
 
-    InnTestUtilities.timeAdvances(inn, 5);
+    timeAdvances(inn, 5);
 
-    Assertions.assertThat(inn.items[0].quality).isNotNegative();
+    assertThat(inn.items[0].quality).isNotNegative();
+  }
+
+  @Test
+  void givenAnItem_whenPrintingItsContents_theOutputContainsAllFields() {
+    Item armor = new Item("Mandalorean armor", -1, 95);
+
+    assertThat(armor.toString())
+        .contains("Mandalorean armor")
+        .contains("-1")
+        .contains("95");
   }
 
 }

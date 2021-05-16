@@ -1,12 +1,16 @@
 package com.gildedrose;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("Some items increase in value as time passes")
+@DisplayNameGeneration(ReplaceUnderscoredCamelCasing.class)
 public class AppreciatingItemsBusinessTest {
 
   @Test
-  void givenAnItemThatIsKnownToAppreciate_whenTimeAdvances_TheQualityIncreases() {
+  void givenAnItemThatIsKnownToAppreciate_whenTimeAdvances_thenTheQualityIncreases() {
     GildedRose inn = InnTestUtilities.createInnWithSingleItem(new Item("Aged Brie", 2, 0));
 
     InnTestUtilities.timeAdvances(inn);
@@ -15,7 +19,7 @@ public class AppreciatingItemsBusinessTest {
   }
 
   @Test
-  void givenAnItemThatIsKnownToAppreciate_whenSellInDateIsExceeded_TheQualityIncreasesTwiceAsFast() {
+  void givenAnItemThatIsKnownToAppreciate_whenSellInDateIsExceeded_thenTheQualityIncreasesTwiceAsFast() {
     GildedRose inn = InnTestUtilities.createInnWithSingleItem(new Item("Aged Brie", 2, 0));
 
     InnTestUtilities.timeAdvances(inn, 4);
