@@ -9,22 +9,22 @@ import org.junit.jupiter.api.Test;
 @DisplayNameGeneration(ReplaceUnderscoredCamelCasing.class)
 public class AppreciatingItemsBusinessTest {
 
-  @Test
-  void givenAnItemThatIsKnownToAppreciate_whenTimeAdvances_thenTheQualityIncreases() {
-    GildedRose inn = InnTestUtilities.createInnWithSingleItem(new Item("Aged Brie", 2, 0));
+	@Test
+	void givenAnItemThatIsKnownToAppreciate_whenTimeAdvances_thenTheQualityIncreases() {
+		GildedRose inn = InnTestUtilities.createInnWithSingleItem(new Item("Aged Brie", 2, 0));
 
-    InnTestUtilities.timeAdvances(inn);
+		InnTestUtilities.timeAdvances(inn);
 
-    Assertions.assertThat(inn.items[0].quality).isEqualTo(1);
-  }
+		Assertions.assertThat(inn.items[0].quality).isEqualTo(1);
+	}
 
-  @Test
-  void givenAnItemThatIsKnownToAppreciate_whenSellInDateIsExceeded_thenTheQualityIncreasesTwiceAsFast() {
-    GildedRose inn = InnTestUtilities.createInnWithSingleItem(new Item("Aged Brie", 2, 0));
+	@Test
+	void givenAnItemThatIsKnownToAppreciate_whenSellInDateIsExceeded_thenTheQualityIncreasesTwiceAsFast() {
+		GildedRose inn = InnTestUtilities.createInnWithSingleItem(new Item("Aged Brie", 2, 0));
 
-    InnTestUtilities.timeAdvances(inn, 4);
+		InnTestUtilities.timeAdvances(inn, 4);
 
-    Assertions.assertThat(inn.items[0].quality).isEqualTo(6);
-  }
+		Assertions.assertThat(inn.items[0].quality).isEqualTo(6);
+	}
 
 }

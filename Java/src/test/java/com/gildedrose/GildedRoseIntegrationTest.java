@@ -7,14 +7,14 @@ import org.junit.jupiter.api.Test;
 @DisplayNameGeneration(ReplaceUnderscoredCamelCasing.class)
 public class GildedRoseIntegrationTest {
 
-  @Test
-  void givenAStartingInventoryStock_whenCreatingAnInn_theInventoryIsPresent() {
-    GildedRose inn = InnTestUtilities.createInnWithSingleItem(new Item("foo", 0, 0));
+	@Test
+	void givenAStartingInventoryStock_whenCreatingAnInn_theInventoryIsPresent() {
+		GildedRose inn = InnTestUtilities.createInnWithSingleItem(new Item("foo", 0, 0));
 
-    Assertions.assertThat(inn.items[0])
-        .isNotNull()
-        .extracting("name")
-        .isEqualTo("foo");
-  }
+		Assertions.assertThat(inn.items[0])
+				.isNotNull()
+				.extracting("name")
+				.isEqualTo("foo");
+	}
 
 }
