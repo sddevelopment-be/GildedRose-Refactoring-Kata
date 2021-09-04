@@ -14,7 +14,7 @@ public class EventTicketsBusinessTest {
 
 		InnTestUtilities.timeAdvances(theGildedRose, 7);
 
-		Assertions.assertThat(theGildedRose.items[0].quality).isEqualTo(29);
+		Assertions.assertThat(theGildedRose.getItems().get(0).quality).isEqualTo(29);
 	}
 
 	@Test
@@ -24,7 +24,7 @@ public class EventTicketsBusinessTest {
 
 		InnTestUtilities.timeAdvances(theGildedRose, 3);
 
-		Assertions.assertThat(theGildedRose.items[0].quality).isEqualTo(29);
+		Assertions.assertThat(theGildedRose.getItems().get(0).quality).isEqualTo(29);
 	}
 
 	@Test
@@ -34,7 +34,7 @@ public class EventTicketsBusinessTest {
 
 		InnTestUtilities.timeAdvances(theGildedRose, 5);
 
-		Assertions.assertThat(theGildedRose.items[0].quality).isEqualTo(0);
+		Assertions.assertThat(theGildedRose.getItems().get(0).quality).isEqualTo(0);
 	}
 
 }

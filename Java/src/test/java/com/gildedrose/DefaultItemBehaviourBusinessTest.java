@@ -20,7 +20,7 @@ class DefaultItemBehaviourBusinessTest {
 
 		timeAdvances(inn);
 
-		assertThat(inn.items[0])
+		assertThat(inn.getItems().get(0))
 				.isNotNull()
 				.extracting("quality")
 				.isEqualTo(DEFAULT_MAX_QUALITY - DEFAULT_DEGRADATION_AMOUNT);
@@ -33,7 +33,7 @@ class DefaultItemBehaviourBusinessTest {
 
 		timeAdvances(inn);
 
-		assertThat(inn.items[0].sellIn).isEqualTo(9);
+		assertThat(inn.getItems().get(0).sellIn).isEqualTo(9);
 	}
 
 	@Test
@@ -43,7 +43,7 @@ class DefaultItemBehaviourBusinessTest {
 
 		timeAdvances(inn, 11);
 
-		assertThat(inn.items[0].quality)
+		assertThat(inn.getItems().get(0).quality)
 				.isEqualTo(DEFAULT_MAX_QUALITY - 12);
 	}
 
@@ -53,7 +53,7 @@ class DefaultItemBehaviourBusinessTest {
 
 		timeAdvances(inn, 250);
 
-		assertThat(inn.items[0].quality).isZero();
+		assertThat(inn.getItems().get(0).quality).isZero();
 	}
 
 	@Test
@@ -62,7 +62,7 @@ class DefaultItemBehaviourBusinessTest {
 
 		timeAdvances(inn, 5);
 
-		assertThat(inn.items[0].quality).isNotNegative();
+		assertThat(inn.getItems().get(0).quality).isNotNegative();
 	}
 
 	@Test

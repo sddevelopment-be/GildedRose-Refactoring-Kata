@@ -19,8 +19,10 @@ public final class InnTestUtilities {
 	}
 
 	public static GildedRose createInnWithSingleItem(final Item itemToStartWith) {
-		GildedRose inn = new GildedRose(new Item[] { itemToStartWith });
-		Assertions.assertThat(inn.items).hasSize(1);
+		GildedRose inn = GildedRose.builder()
+				.item(itemToStartWith)
+				.build();
+		Assertions.assertThat(inn.getItems()).hasSize(1);
 		return inn;
 	}
 }

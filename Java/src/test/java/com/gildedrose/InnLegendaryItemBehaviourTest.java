@@ -14,7 +14,7 @@ public class InnLegendaryItemBehaviourTest {
 
 		InnTestUtilities.timeAdvances(inn);
 
-		Assertions.assertThat(inn.items[0].quality).isEqualTo(80);
+		Assertions.assertThat(inn.getItems().get(0).quality).isEqualTo(80);
 	}
 
 	@Test
@@ -24,7 +24,7 @@ public class InnLegendaryItemBehaviourTest {
 
 		InnTestUtilities.timeAdvances(inn);
 
-		Assertions.assertThat(inn.items[0].sellIn).isEqualTo(-1);
+		Assertions.assertThat(inn.getItems().get(0).sellIn).isEqualTo(-1);
 	}
 
 }

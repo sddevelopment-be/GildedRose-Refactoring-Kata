@@ -11,7 +11,7 @@ public class GildedRoseIntegrationTest {
 	void givenAStartingInventoryStock_whenCreatingAnInn_theInventoryIsPresent() {
 		GildedRose inn = InnTestUtilities.createInnWithSingleItem(new Item("foo", 0, 0));
 
-		Assertions.assertThat(inn.items[0])
+		Assertions.assertThat(inn.getItems().get(0))
 				.isNotNull()
 				.extracting("name")
 				.isEqualTo("foo");

@@ -1,62 +1,95 @@
 package com.gildedrose;
 
+import static java.util.Arrays.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Singular;
+
+@Getter
+@Builder
+@AllArgsConstructor
 class GildedRose {
-	Item[] items;
+
+	@Singular List<Item> items = new ArrayList<>();
 
 	public GildedRose(Item[] items) {
-		this.items = items;
+		this(asList(items));
 	}
 
 	public void updateQuality() {
-		for (int i = 0; i < items.length; i++) {
-			if (!items[i].name.equals("Aged Brie")
-					&& !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-				if (items[i].quality > 0) {
-					if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-						items[i].quality = items[i].quality - 1;
+		for (Item item: items) {
+			if (!isEventTicket(item) && !isAppreciatingWithAge(item)) {
+				if (item.getQuality() > 0) {
+					if (!isLegendaryItem(item)) {
+						item.setQuality(devaluate(item));
 					}
 				}
 			} else {
-				if (items[i].quality < 50) {
-					items[i].quality = items[i].quality + 1;
+				if (item.getQuality() < 50) {
+					item.setQuality(appreciate(item));
 
-					if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-						if (items[i].sellIn < 11) {
-							if (items[i].quality < 50) {
-								items[i].quality = items[i].quality + 1;
+					if (isEventTicket(item)) {
+						if (item.sellIn < 11) {
+							if (item.getQuality() < 50) {
+								item.setQuality(appreciate(item));
 							}
 						}
 
-						if (items[i].sellIn < 6) {
-							if (items[i].quality < 50) {
-								items[i].quality = items[i].quality + 1;
+						if (item.sellIn < 6) {
+							if (item.getQuality() < 50) {
+								item.setQuality(appreciate(item));
 							}
 						}
 					}
 				}
 			}
 
-			if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-				items[i].sellIn = items[i].sellIn - 1;
+			if (!isLegendaryItem(item)) {
+				item.sellIn = item.sellIn - 1;
 			}
 
-			if (items[i].sellIn < 0) {
-				if (!items[i].name.equals("Aged Brie")) {
-					if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-						if (items[i].quality > 0) {
-							if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-								items[i].quality = items[i].quality - 1;
+			 if (item.sellIn < 0) {
+				if (!isAppreciatingWithAge(item)) {
+					if (!isEventTicket(item)) {
+						if (item.getQuality() > 0) {
+							if (!isLegendaryItem(item)) {
+								item.setQuality(devaluate(item));
 							}
 						}
 					} else {
-						items[i].quality = items[i].quality - items[i].quality;
+						item.setQuality(0);
 					}
 				} else {
-					if (items[i].quality < 50) {
-						items[i].quality = items[i].quality + 1;
+					if (item.getQuality() < 50) {
+						item.setQuality(appreciate(item));
 					}
 				}
 			}
 		}
+	}
+
+	private boolean isAppreciatingWithAge(Item item) {
+		return item.getName().equals("Aged Brie");
+	}
+
+	private boolean isLegendaryItem(Item item) {
+		return item.getName().equals("Sulfuras, Hand of Ragnaros");
+	}
+
+	private boolean isEventTicket(Item item) {
+		return item.getName().equals("Backstage passes to a TAFKAL80ETC concert");
+	}
+
+	private int appreciate(Item item) {
+		return item.getQuality() + 1;
+	}
+
+	private int devaluate(Item item) {
+		return item.getQuality() - 1;
 	}
 }

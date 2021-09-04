@@ -16,6 +16,14 @@
     </properties>
 
     <dependencies>
+        <!-- Compile code dependencies-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.20</version>
+        </dependency>
+
+        <!-- Test dependencies-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -29,6 +37,7 @@
             <version>3.19.0</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>

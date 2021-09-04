@@ -15,7 +15,7 @@ public class AppreciatingItemsBusinessTest {
 
 		InnTestUtilities.timeAdvances(inn);
 
-		Assertions.assertThat(inn.items[0].quality).isEqualTo(1);
+		Assertions.assertThat(inn.getItems().get(0).quality).isEqualTo(1);
 	}
 
 	@Test
@@ -24,7 +24,7 @@ public class AppreciatingItemsBusinessTest {
 
 		InnTestUtilities.timeAdvances(inn, 4);
 
-		Assertions.assertThat(inn.items[0].quality).isEqualTo(6);
+		Assertions.assertThat(inn.getItems().get(0).quality).isEqualTo(6);
 	}
 
 }
